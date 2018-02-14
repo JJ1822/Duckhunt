@@ -1,21 +1,19 @@
 
 class Stage {
   constructor() {
+  this.img = new Image();
+  this.img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background.png';
   }
 
   draw(ctx) {
     // ctx.clearRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
     // ctx.fillStyle = "0xFFFFFF";
     // ctx.fillRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
-    const width = 900;
-    const height = 500;
-    let img2 = new Image();
-    img2.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/tree.png';
-    let img = new Image();
-    img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background.png';
-    img.onload = function() {
-      ctx.drawImage(img, 0, 0, width, height);
-    };
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+      ctx.drawImage(this.img, 0, 0, width, height);
+
   }
 
 }

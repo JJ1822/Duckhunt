@@ -76,8 +76,8 @@ var Game = __webpack_require__(2);
 document.addEventListener("DOMContentLoaded", function () {
   var canvasEl = document.getElementById('canvas');
 
-  canvasEl.width = 900;
-  canvasEl.height = 500;
+  canvasEl.width = window.innerWidth;
+  canvasEl.height = window.innerHeight;
 
   var ctx = canvasEl.getContext("2d");
   var stage = new Stage();
@@ -100,23 +100,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Stage = function () {
   function Stage() {
     _classCallCheck(this, Stage);
+
+    this.img = new Image();
+    this.img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background.png';
   }
 
   _createClass(Stage, [{
-    key: 'draw',
+    key: "draw",
     value: function draw(ctx) {
       // ctx.clearRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
       // ctx.fillStyle = "0xFFFFFF";
       // ctx.fillRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
-      var width = 900;
-      var height = 500;
-      var img2 = new Image();
-      img2.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/tree.png';
-      var img = new Image();
-      img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background.png';
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0, width, height);
-      };
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      ctx.drawImage(this.img, 0, 0, width, height);
     }
   }]);
 
@@ -156,10 +154,15 @@ var Game = function () {
     _classCallCheck(this, Game);
 
     this.ctx = ctx;
-    this.duck = new Duck({ pos: [1, 1], vel: [1, 1], dir: "right" });
+    this.duck = new Duck({ pos: [1, 1], vel: [4, 4], dir: "right" });
+    this.duck1 = new Duck({ pos: [1, 200], vel: [7, 5], dir: "right" });
+    this.duck2 = new Duck({ pos: [400, 1], vel: [-4, 2], dir: "right" });
     this.stage = new Stage();
 
     // this.mainLoop = this.mainLoop.bind(this);
+    this.canvas = document.getElementById('canvas');
+    this.handleClick = this.handleClick.bind(this);
+    this.canvas.addEventListener("click", this.handleClick);
   }
 
   _createClass(Game, [{
@@ -181,9 +184,23 @@ var Game = function () {
   }, {
     key: "draw",
     value: function draw() {
-      this.ctx.clearRect(0, 0, 900, 500);
+      this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       this.duck.draw(this.ctx);
+      this.duck1.draw(this.ctx);
+      this.duck2.draw(this.ctx);
       this.stage.draw(this.ctx);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      var x = e.clientX;
+      var y = e.clientY;
+      var imgHeight = this.duck.img1.height;
+      var imgWidth = this.duck.img1.width;
+
+      if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight) {
+        this.duck.alive = false;
+      }
     }
   }]);
 
@@ -218,12 +235,12 @@ var Duck = function () {
     this.img2.src = '../app/assets/images/ducks/right1.png';
     this.img3 = new Image();
     this.img3.src = '../app/assets/images/ducks/right2.png';
-    this.img4 = new Image();
-    this.img4.src = '../app/assets/images/ducks/right0.png';
-    this.img5 = new Image();
-    this.img5.src = '../app/assets/images/ducks/right0.png';
-    this.img6 = new Image();
-    this.img6.src = '../app/assets/images/ducks/right0.png';
+    this.leftImg1 = new Image();
+    this.leftImg1.src = '../app/assets/images/ducks/left0.png';
+    this.leftImg2 = new Image();
+    this.leftImg2.src = '../app/assets/images/ducks/left1.png';
+    this.leftImg3 = new Image();
+    this.leftImg3.src = '../app/assets/images/ducks/left2.png';
   }
 
   _createClass(Duck, [{
@@ -256,17 +273,40 @@ var Duck = function () {
         22: this.img3,
         23: this.img3
       };
-      // const leftimg = {
-      //   0: '../app/assets/images/ducks/left0.png',
-      //   1: '../app/assets/images/ducks/left1.png',
-      //   2: '../app/assets/images/ducks/left2.png'
-      // };
+
+      var leftimg = {
+        0: this.leftImg1,
+        1: this.leftImg1,
+        2: this.leftImg1,
+        3: this.leftImg1,
+        4: this.leftImg1,
+        5: this.leftImg1,
+        6: this.leftImg1,
+        7: this.leftImg1,
+        8: this.leftImg2,
+        9: this.leftImg2,
+        10: this.leftImg2,
+        11: this.leftImg2,
+        12: this.leftImg2,
+        13: this.leftImg2,
+        14: this.leftImg2,
+        15: this.leftImg2,
+        16: this.leftImg3,
+        17: this.leftImg3,
+        18: this.leftImg3,
+        19: this.leftImg3,
+        20: this.leftImg3,
+        21: this.leftImg3,
+        22: this.leftImg3,
+        23: this.leftImg3
+      };
 
       var posx = this.pos[0];
       var posy = this.pos[1];
       // this.img.src = rightimg[this.counter];
-
-      ctx.drawImage(rightimg[this.counter], posx, posy);
+      if (this.vel[0] < 0) {
+        ctx.drawImage(leftimg[this.counter], posx, posy);
+      } else ctx.drawImage(rightimg[this.counter], posx, posy);
       // let img = new Image();
       // if( this.dir === 'right' ) {
       //   img.src = rightimg[this.counter];
@@ -282,7 +322,14 @@ var Duck = function () {
   }, {
     key: 'move',
     value: function move() {
-
+      var dx = this.pos[0] + this.vel[0];
+      var dy = this.pos[1] + this.vel[1];
+      if (dx > window.innerWidth - 100 || dx < 0) {
+        this.vel[0] = -this.vel[0];
+      }
+      if (dy > window.innerHeight - 150 || dy < 0) {
+        this.vel[1] = -this.vel[1];
+      }
       this.pos[0] += this.vel[0];
       this.pos[1] += this.vel[1];
     }
