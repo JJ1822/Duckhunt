@@ -52,6 +52,12 @@ class Game {
     if ( x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight) {
       this.duck.alive = false;
     }
+    if ( x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight) {
+      this.duck1.alive = false;
+    }
+    if ( x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight) {
+      this.duck2.alive = false;
+    }
   }
 
 

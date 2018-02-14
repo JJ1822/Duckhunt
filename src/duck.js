@@ -18,12 +18,22 @@ class Duck {
     this.leftImg2.src = '../app/assets/images/ducks/left1.png';
     this.leftImg3 = new Image();
     this.leftImg3.src = '../app/assets/images/ducks/left2.png';
+    this.shotImg = new Image();
+    this.shotImg.src = '../app/assets/images/ducks/shot0.png';
+    this.deadImg1 = new Image();
+    this.deadImg1.src = '../app/assets/images/ducks/dead0.png';
+    this.deadImg2 = new Image();
+    this.deadImg2.src = '../app/assets/images/ducks/dead1.png';
+    this.deadImg3 = new Image();
+    this.deadImg3.src = '../app/assets/images/ducks/dead2.png';
+
 
   }
 
 
 
   draw(ctx) {
+    let deathCounter = 0;
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
       0: this.img1,
@@ -79,13 +89,34 @@ class Duck {
       23: this.leftImg3
     };
 
+    const deadimg = {
+      0: this.deadImg1,
+      1: this.deadImg1,
+      2: this.deadImg1,
+      3: this.deadImg1,
+      4: this.deadImg2,
+      5: this.deadImg2,
+      6: this.deadImg2,
+      7: this.deadImg2,
+      8: this.deadImg3,
+      9: this.deadImg3,
+      10: this.deadImg3,
+      11: this.deadImg3
+    };
 
     let posx = this.pos[0];
     let posy = this.pos[1];
     // this.img.src = rightimg[this.counter];
-    if(this.vel[0] < 0) {
+    if(!this.alive && deathCounter > 10) {
+      deathCounter += 1;
+      ctx.drawImage(deadimg[deathCounter % 10], posx, posy);
+    } else if (!this.alive && deathCounter < 11) {
+      deathCounter += 1;
+      ctx.drawImage(this.shotImg, posx, posy);
+    }
+     if (this.alive && this.vel[0] < 0) {
       ctx.drawImage(leftimg[this.counter], posx, posy);
-    } else (
+    } else if (this.alive) (
       ctx.drawImage(rightimg[this.counter], posx, posy)
     );
     // let img = new Image();
@@ -104,6 +135,11 @@ class Duck {
   move() {
     let dx = this.pos[0] + this.vel[0];
     let dy = this.pos[1] + this.vel[1];
+
+    if (!this.alive) {
+      this.vel = [0,1];
+    }
+
     if ( dx > window.innerWidth - 100 || dx < 0 ) {
       this.vel[0] = -this.vel[0];
     }
