@@ -76,12 +76,12 @@ var Game = __webpack_require__(2);
 document.addEventListener("DOMContentLoaded", function () {
   var canvasEl = document.getElementById('canvas');
 
+  document.documentElement.style.cursor = 'crosshair';
   canvasEl.width = window.innerWidth;
   canvasEl.height = window.innerHeight;
-
   var ctx = canvasEl.getContext("2d");
-  var stage = new Stage();
-  stage.draw(ctx);
+  // const stage = new Stage;
+  // stage.draw(ctx);
   var game = new Game(ctx);
   game.play();
 });
@@ -102,19 +102,24 @@ var Stage = function () {
     _classCallCheck(this, Stage);
 
     this.img = new Image();
-    this.img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background.png';
+    this.img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background1.png';
+    this.imgTree = new Image();
+    this.imgTree.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/tree.png';
   }
 
   _createClass(Stage, [{
-    key: "draw",
+    key: 'draw',
     value: function draw(ctx) {
       // ctx.clearRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
       // ctx.fillStyle = "0xFFFFFF";
       // ctx.fillRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
+      debugger;
       var width = window.innerWidth;
       var height = window.innerHeight;
 
       ctx.drawImage(this.img, 0, 0, width, height);
+
+      // ctx.drawImage(this.imgTree, width * .3, height * .3);
     }
   }]);
 
@@ -142,22 +147,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Stage = __webpack_require__(1);
 var Duck = __webpack_require__(3);
 
-var fps = void 0,
-    fpsInterval = void 0,
-    startTime = void 0,
-    now = void 0,
-    then = void 0,
-    elapsed = void 0;
-
 var Game = function () {
   function Game(ctx) {
     _classCallCheck(this, Game);
 
     this.ctx = ctx;
-    this.duck = new Duck({ pos: [1, 1], vel: [4, 4], dir: "right" });
-    this.duck1 = new Duck({ pos: [1, 200], vel: [7, 5], dir: "right" });
-    this.duck2 = new Duck({ pos: [400, 1], vel: [-4, 2], dir: "right" });
+    this.duck = new Duck({ pos: [600, 200], vel: [9, 5], dir: "right" });
+    this.duck1 = new Duck({ pos: [1, 200], vel: [12, 7], dir: "right" });
+    this.duck2 = new Duck({ pos: [600, 1], vel: [-12, 3], dir: "right" });
     this.stage = new Stage();
+    this.gameStart = false;
+    this.points = 0;
 
     // this.mainLoop = this.mainLoop.bind(this);
     this.canvas = document.getElementById('canvas');
@@ -168,7 +168,17 @@ var Game = function () {
   _createClass(Game, [{
     key: "play",
     value: function play() {
+
       this.mainLoop();
+    }
+  }, {
+    key: "drawSplash",
+    value: function drawSplash() {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      console.log("splash");
+      this.stage.draw(this.ctx);
     }
   }, {
     key: "mainLoop",
@@ -184,22 +194,50 @@ var Game = function () {
   }, {
     key: "draw",
     value: function draw() {
-      this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      this.duck.draw(this.ctx);
-      this.duck1.draw(this.ctx);
-      this.duck2.draw(this.ctx);
-      this.stage.draw(this.ctx);
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      if (this.gameStart) {
+        this.ctx.clearRect(0, 0, width, height);
+        this.duck.draw(this.ctx);
+        this.duck1.draw(this.ctx);
+        this.duck2.draw(this.ctx);
+        this.stage.draw(this.ctx);
+        this.ctx.font = "40pt Calibri";
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(this.points, width - 200, height - 50);
+      } else {
+        console.log("else");
+        this.stage.draw(this.ctx);
+        this.ctx.font = "50pt Calibri";
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText("Click the Duck to Start", width - 1050, height - 50);
+      }
     }
   }, {
     key: "handleClick",
     value: function handleClick(e) {
       var x = e.clientX;
       var y = e.clientY;
-      var imgHeight = 30;
-      var imgWidth = 30;
+      var imgHeight = 120;
+      var imgWidth = 120;
+      console.log(x);
+      console.log(y);
+      console.log(imgHeight);
+      console.log(imgWidth);
+      console.log(this.duck.pos[0]);
+      console.log(this.duck.pos[1]);
 
-      if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight) {
+      if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight && x > this.duck.pos[0] && y > this.duck.pos[1]) {
         this.duck.alive = false;
+        this.points += 100;
+      }
+      if (x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight && x > this.duck1.pos[0] && y > this.duck1.pos[1]) {
+        this.duck1.alive = false;
+        this.points += 100;
+      }
+      if (x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight && x > this.duck2.pos[0] && y > this.duck2.pos[1]) {
+        this.duck2.alive = false;
+        this.points += 100;
       }
     }
   }]);
@@ -255,6 +293,9 @@ var Duck = function () {
   _createClass(Duck, [{
     key: 'draw',
     value: function draw(ctx) {
+      var sizeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 90;
+      var sizeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 90;
+
 
       this.counter = (this.counter + 1) % 24;
       var rightimg = {
@@ -331,14 +372,14 @@ var Duck = function () {
       // this.img.src = rightimg[this.counter];
       if (!this.alive && this.deathCounter > 10) {
         this.deathCounter += 1;
-        ctx.drawImage(deadimg[this.deathCounter % 10], posx, posy);
+        ctx.drawImage(deadimg[this.deathCounter % 10], posx, posy, sizeX, sizeY);
       } else if (!this.alive && this.deathCounter < 11) {
         this.deathCounter += 1;
-        ctx.drawImage(this.shotImg, posx, posy);
+        ctx.drawImage(this.shotImg, posx, posy, sizeX, sizeY);
       }
       if (this.alive && this.vel[0] < 0) {
-        ctx.drawImage(leftimg[this.counter], posx, posy);
-      } else if (this.alive) ctx.drawImage(rightimg[this.counter], posx, posy);
+        ctx.drawImage(leftimg[this.counter], posx, posy, sizeX, sizeY);
+      } else if (this.alive) ctx.drawImage(rightimg[this.counter], posx, posy, sizeX, sizeY);
       // let img = new Image();
       // if( this.dir === 'right' ) {
       //   img.src = rightimg[this.counter];
@@ -360,7 +401,7 @@ var Duck = function () {
       if (!this.alive && this.deathCounter < 11) {
         this.vel = [0, 0];
       } else if (!this.alive && this.deathCounter > 10) {
-        this.vel = [0, 3];
+        this.vel = [0, 5];
       } else if (dx > window.innerWidth - 100 || dx < 0) {
         this.vel[0] = -this.vel[0];
       } else if (dy > window.innerHeight - 150 || dy < 0) {

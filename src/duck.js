@@ -33,7 +33,7 @@ class Duck {
 
 
 
-  draw(ctx) {
+  draw(ctx, sizeX = 90, sizeY = 90) {
 
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
@@ -110,15 +110,15 @@ class Duck {
     // this.img.src = rightimg[this.counter];
     if(!this.alive && this.deathCounter > 10) {
       this.deathCounter += 1;
-      ctx.drawImage(deadimg[this.deathCounter % 10], posx, posy);
+      ctx.drawImage(deadimg[this.deathCounter % 10], posx, posy, sizeX, sizeY);
     } else if (!this.alive && this.deathCounter < 11) {
       this.deathCounter += 1;
-      ctx.drawImage(this.shotImg, posx, posy);
+      ctx.drawImage(this.shotImg, posx, posy, sizeX, sizeY);
     }
      if (this.alive && this.vel[0] < 0) {
-      ctx.drawImage(leftimg[this.counter], posx, posy);
+      ctx.drawImage(leftimg[this.counter], posx, posy, sizeX, sizeY);
     } else if (this.alive) (
-      ctx.drawImage(rightimg[this.counter], posx, posy)
+      ctx.drawImage(rightimg[this.counter], posx, posy, sizeX, sizeY)
     );
     // let img = new Image();
     // if( this.dir === 'right' ) {
@@ -140,7 +140,7 @@ class Duck {
     if (!this.alive && this.deathCounter < 11) {
       this.vel = [0,0];
     } else if (!this.alive && this.deathCounter > 10) {
-      this.vel = [0,3];
+      this.vel = [0,5];
     } else if ( dx > window.innerWidth - 100 || dx < 0 ) {
       this.vel[0] = -this.vel[0];
     } else if ( dy > (window.innerHeight - 150) || dy < 0 ) {
