@@ -195,17 +195,11 @@ var Game = function () {
     value: function handleClick(e) {
       var x = e.clientX;
       var y = e.clientY;
-      var imgHeight = this.duck.img1.height;
-      var imgWidth = this.duck.img1.width;
+      var imgHeight = 30;
+      var imgWidth = 30;
 
       if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight) {
         this.duck.alive = false;
-      }
-      if (x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight) {
-        this.duck1.alive = false;
-      }
-      if (x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight) {
-        this.duck2.alive = false;
       }
     }
   }]);
@@ -234,6 +228,7 @@ var Duck = function () {
     this.vel = options.vel;
     this.dir = options.dir;
     this.alive = true;
+    this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
     this.img1.src = '../app/assets/images/ducks/right0.png';
@@ -260,7 +255,7 @@ var Duck = function () {
   _createClass(Duck, [{
     key: 'draw',
     value: function draw(ctx) {
-      var deathCounter = 0;
+
       this.counter = (this.counter + 1) % 24;
       var rightimg = {
         0: this.img1,
@@ -334,11 +329,11 @@ var Duck = function () {
       var posx = this.pos[0];
       var posy = this.pos[1];
       // this.img.src = rightimg[this.counter];
-      if (!this.alive && deathCounter > 10) {
-        deathCounter += 1;
-        ctx.drawImage(deadimg[deathCounter % 10], posx, posy);
-      } else if (!this.alive && deathCounter < 11) {
-        deathCounter += 1;
+      if (!this.alive && this.deathCounter > 10) {
+        this.deathCounter += 1;
+        ctx.drawImage(deadimg[this.deathCounter % 10], posx, posy);
+      } else if (!this.alive && this.deathCounter < 11) {
+        this.deathCounter += 1;
         ctx.drawImage(this.shotImg, posx, posy);
       }
       if (this.alive && this.vel[0] < 0) {
@@ -362,14 +357,13 @@ var Duck = function () {
       var dx = this.pos[0] + this.vel[0];
       var dy = this.pos[1] + this.vel[1];
 
-      if (!this.alive) {
-        this.vel = [0, 1];
-      }
-
-      if (dx > window.innerWidth - 100 || dx < 0) {
+      if (!this.alive && this.deathCounter < 11) {
+        this.vel = [0, 0];
+      } else if (!this.alive && this.deathCounter > 10) {
+        this.vel = [0, 3];
+      } else if (dx > window.innerWidth - 100 || dx < 0) {
         this.vel[0] = -this.vel[0];
-      }
-      if (dy > window.innerHeight - 150 || dy < 0) {
+      } else if (dy > window.innerHeight - 150 || dy < 0) {
         this.vel[1] = -this.vel[1];
       }
       this.pos[0] += this.vel[0];

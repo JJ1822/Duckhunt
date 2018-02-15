@@ -46,17 +46,12 @@ class Game {
   handleClick(e) {
     let x = e.clientX;
     let y = e.clientY;
-    const imgHeight = this.duck.img1.height;
-    const imgWidth = this.duck.img1.width;
+    const imgHeight = 30;
+    const imgWidth = 30;
 
-    if ( x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight) {
+
+    if ( x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight ) {
       this.duck.alive = false;
-    }
-    if ( x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight) {
-      this.duck1.alive = false;
-    }
-    if ( x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight) {
-      this.duck2.alive = false;
     }
   }
 

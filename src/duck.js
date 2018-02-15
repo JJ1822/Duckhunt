@@ -5,6 +5,7 @@ class Duck {
     this.vel = options.vel;
     this.dir = options.dir;
     this.alive = true;
+    this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
     this.img1.src = '../app/assets/images/ducks/right0.png';
@@ -33,7 +34,7 @@ class Duck {
 
 
   draw(ctx) {
-    let deathCounter = 0;
+
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
       0: this.img1,
@@ -107,11 +108,11 @@ class Duck {
     let posx = this.pos[0];
     let posy = this.pos[1];
     // this.img.src = rightimg[this.counter];
-    if(!this.alive && deathCounter > 10) {
-      deathCounter += 1;
-      ctx.drawImage(deadimg[deathCounter % 10], posx, posy);
-    } else if (!this.alive && deathCounter < 11) {
-      deathCounter += 1;
+    if(!this.alive && this.deathCounter > 10) {
+      this.deathCounter += 1;
+      ctx.drawImage(deadimg[this.deathCounter % 10], posx, posy);
+    } else if (!this.alive && this.deathCounter < 11) {
+      this.deathCounter += 1;
       ctx.drawImage(this.shotImg, posx, posy);
     }
      if (this.alive && this.vel[0] < 0) {
@@ -136,14 +137,13 @@ class Duck {
     let dx = this.pos[0] + this.vel[0];
     let dy = this.pos[1] + this.vel[1];
 
-    if (!this.alive) {
-      this.vel = [0,1];
-    }
-
-    if ( dx > window.innerWidth - 100 || dx < 0 ) {
+    if (!this.alive && this.deathCounter < 11) {
+      this.vel = [0,0];
+    } else if (!this.alive && this.deathCounter > 10) {
+      this.vel = [0,3];
+    } else if ( dx > window.innerWidth - 100 || dx < 0 ) {
       this.vel[0] = -this.vel[0];
-    }
-    if ( dy > (window.innerHeight - 150) || dy < 0 ) {
+    } else if ( dy > (window.innerHeight - 150) || dy < 0 ) {
       this.vel[1] = -this.vel[1];
     }
     this.pos[0] += this.vel[0];
