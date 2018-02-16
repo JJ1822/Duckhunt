@@ -8,25 +8,25 @@ class Duck {
     this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
-    this.img1.src = '../app/assets/images/ducks/right0.png';
+    this.img1.src = './app/assets/images/ducks/right0.png';
     this.img2 = new Image();
-    this.img2.src = '../app/assets/images/ducks/right1.png';
+    this.img2.src = './app/assets/images/ducks/right1.png';
     this.img3 = new Image();
-    this.img3.src = '../app/assets/images/ducks/right2.png';
+    this.img3.src = './app/assets/images/ducks/right2.png';
     this.leftImg1 = new Image();
-    this.leftImg1.src = '../app/assets/images/ducks/left0.png';
+    this.leftImg1.src = './app/assets/images/ducks/left0.png';
     this.leftImg2 = new Image();
-    this.leftImg2.src = '../app/assets/images/ducks/left1.png';
+    this.leftImg2.src = './app/assets/images/ducks/left1.png';
     this.leftImg3 = new Image();
-    this.leftImg3.src = '../app/assets/images/ducks/left2.png';
+    this.leftImg3.src = './app/assets/images/ducks/left2.png';
     this.shotImg = new Image();
-    this.shotImg.src = '../app/assets/images/ducks/shot0.png';
+    this.shotImg.src = './app/assets/images/ducks/shot0.png';
     this.deadImg1 = new Image();
-    this.deadImg1.src = '../app/assets/images/ducks/dead0.png';
+    this.deadImg1.src = './app/assets/images/ducks/dead0.png';
     this.deadImg2 = new Image();
-    this.deadImg2.src = '../app/assets/images/ducks/dead1.png';
+    this.deadImg2.src = './app/assets/images/ducks/dead1.png';
     this.deadImg3 = new Image();
-    this.deadImg3.src = '../app/assets/images/ducks/dead2.png';
+    this.deadImg3.src = './app/assets/images/ducks/dead2.png';
 
 
   }

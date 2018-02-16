@@ -3,7 +3,6 @@ const Game = require("./game");
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvasEl = document.getElementById('canvas');
-
   document.documentElement.style.cursor = 'crosshair';
   canvasEl.width = window.innerWidth;
   canvasEl.height = window.innerHeight;

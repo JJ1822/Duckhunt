@@ -4,7 +4,7 @@ module.exports = {
   context: __dirname,
   entry: "./src/duckhunt.js",
   output: {
-    filename: "./src/bundle.js"
+    filename: "./bundle.js"
   },
   module: {
     loaders: [

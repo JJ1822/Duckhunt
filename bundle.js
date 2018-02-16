@@ -60,34 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Stage = __webpack_require__(1);
-var Game = __webpack_require__(2);
-
-document.addEventListener("DOMContentLoaded", function () {
-  var canvasEl = document.getElementById('canvas');
-
-  document.documentElement.style.cursor = 'crosshair';
-  canvasEl.width = window.innerWidth;
-  canvasEl.height = window.innerHeight;
-  var ctx = canvasEl.getContext("2d");
-  // const stage = new Stage;
-  // stage.draw(ctx);
-  var game = new Game(ctx);
-  game.play();
-});
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -102,13 +79,11 @@ var Stage = function () {
     _classCallCheck(this, Stage);
 
     this.img = new Image();
-    this.img.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/background1.png';
-    this.imgTree = new Image();
-    this.imgTree.src = '/Users/jayjohnson/Desktop/duck_hunt/app/assets/images/stage/tree.png';
+    this.img.src = './app/assets/images/stage/background1.png';
   }
 
   _createClass(Stage, [{
-    key: 'draw',
+    key: "draw",
     value: function draw(ctx) {
       // ctx.clearRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
       // ctx.fillStyle = "0xFFFFFF";
@@ -134,6 +109,28 @@ Stage.FPS = 32;
 module.exports = Stage;
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Stage = __webpack_require__(0);
+var Game = __webpack_require__(2);
+
+document.addEventListener("DOMContentLoaded", function () {
+  var canvasEl = document.getElementById('canvas');
+  document.documentElement.style.cursor = 'crosshair';
+  canvasEl.width = window.innerWidth;
+  canvasEl.height = window.innerHeight;
+  var ctx = canvasEl.getContext("2d");
+  // const stage = new Stage;
+  // stage.draw(ctx);
+  var game = new Game(ctx);
+  game.play();
+});
+
+/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -144,7 +141,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Stage = __webpack_require__(1);
+var Stage = __webpack_require__(0);
 var Duck = __webpack_require__(3);
 
 var Game = function () {
@@ -177,7 +174,7 @@ var Game = function () {
       var _this = this;
 
       this.draw();
-      window.requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
         _this.mainLoop();
       });
     }
@@ -284,25 +281,25 @@ var Duck = function () {
     this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
-    this.img1.src = '../app/assets/images/ducks/right0.png';
+    this.img1.src = './app/assets/images/ducks/right0.png';
     this.img2 = new Image();
-    this.img2.src = '../app/assets/images/ducks/right1.png';
+    this.img2.src = './app/assets/images/ducks/right1.png';
     this.img3 = new Image();
-    this.img3.src = '../app/assets/images/ducks/right2.png';
+    this.img3.src = './app/assets/images/ducks/right2.png';
     this.leftImg1 = new Image();
-    this.leftImg1.src = '../app/assets/images/ducks/left0.png';
+    this.leftImg1.src = './app/assets/images/ducks/left0.png';
     this.leftImg2 = new Image();
-    this.leftImg2.src = '../app/assets/images/ducks/left1.png';
+    this.leftImg2.src = './app/assets/images/ducks/left1.png';
     this.leftImg3 = new Image();
-    this.leftImg3.src = '../app/assets/images/ducks/left2.png';
+    this.leftImg3.src = './app/assets/images/ducks/left2.png';
     this.shotImg = new Image();
-    this.shotImg.src = '../app/assets/images/ducks/shot0.png';
+    this.shotImg.src = './app/assets/images/ducks/shot0.png';
     this.deadImg1 = new Image();
-    this.deadImg1.src = '../app/assets/images/ducks/dead0.png';
+    this.deadImg1.src = './app/assets/images/ducks/dead0.png';
     this.deadImg2 = new Image();
-    this.deadImg2.src = '../app/assets/images/ducks/dead1.png';
+    this.deadImg2.src = './app/assets/images/ducks/dead1.png';
     this.deadImg3 = new Image();
-    this.deadImg3.src = '../app/assets/images/ducks/dead2.png';
+    this.deadImg3.src = './app/assets/images/ducks/dead2.png';
   }
 
   _createClass(Duck, [{

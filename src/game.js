@@ -32,7 +32,7 @@ class Game {
 
 
     this.draw();
-    window.requestAnimationFrame( () => {
+    requestAnimationFrame( () => {
       this.mainLoop();
     });
 
