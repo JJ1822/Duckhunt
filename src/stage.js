@@ -11,7 +11,7 @@ class Stage {
     // ctx.clearRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
     // ctx.fillStyle = "0xFFFFFF";
     // ctx.fillRect(0, 0, Stage.DIM_X, Stage.DIM_Y);
-    debugger
+  
     const width = window.innerWidth;
     const height = window.innerHeight;
 
