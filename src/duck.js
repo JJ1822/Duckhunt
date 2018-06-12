@@ -7,8 +7,8 @@ class Duck {
     this.alive = true;
     this.deathCounter = 0;
     this.counter = 0;
-    this.img1 = new Image();
-    this.img1.src = './app/assets/images/ducks/right0.png';
+    // this.img = new Image();
+    // this.img.src = './app/assets/images/Custom Edited - Duck Hunt Customs - Duck Hunt Remade.png';
     this.img2 = new Image();
     this.img2.src = './app/assets/images/ducks/right1.png';
     this.img3 = new Image();
@@ -115,11 +115,12 @@ class Duck {
       this.deathCounter += 1;
       ctx.drawImage(this.shotImg, posx, posy, sizeX, sizeY);
     }
+
      if (this.alive && this.vel[0] < 0) {
       ctx.drawImage(leftimg[this.counter], posx, posy, sizeX, sizeY);
     } else if (this.alive) (
       ctx.drawImage(rightimg[this.counter], posx, posy, sizeX, sizeY)
-    );
+    )
     // let img = new Image();
     // if( this.dir === 'right' ) {
     //   img.src = rightimg[this.counter];
