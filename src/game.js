@@ -20,6 +20,7 @@ class Game {
     this.duck3 = new Duck({ pos: [600,100], vel: [0,0], dir: "right" });
     this.stage = new Stage;
     this.gameStart = false;
+    this.shot = 0;
     this.points = 0;
 
     this.mainLoop = this.mainLoop.bind(this);
@@ -46,8 +47,7 @@ class Game {
   }
 
   draw() {
-    const SCREEN_WIDTH = window.innerWidth;
-    const SCREEN_HEIGHT = window.innerHeight;
+
     if(this.points === 300) {
       this.resetGame();
       // this.resetGame();
@@ -81,6 +81,7 @@ class Game {
     // this.duck3 = new Duck({ pos: [600,100], vel: [0,0], dir: "right" });
     // this.stage = new Stage;
     this.gameStart = false;
+    this.shot = 0;
     this.points = 0;}, 2000);
   }
 
@@ -89,12 +90,14 @@ class Game {
     let y = e.clientY;
     const imgHeight = 120;
     const imgWidth = 150;
-    const SCREEN_WIDTH = window.innerWidth;
-    const SCREEN_HEIGHT = window.innerHeight;
+    this.shot += 1;
+    console.log(this.shot);
+    if(this.shot === 3) {
+      this.resetGame();
+    }
 
-
-		this.ctx.fillStyle = ("white");
-    this.ctx.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
+		// this.ctx.fillStyle = ("red");
+    // this.ctx.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if ( x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight
          && x  > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart) {
@@ -112,9 +115,10 @@ class Game {
       this.points += 100;
     }
     if ( x < this.duck3.pos[0] + 450 && y < this.duck3.pos[1] + 450
-         && x  > this.duck3.pos[0] && y > this.duck3.pos[1]) {
+         && x  > this.duck3.pos[0] && y > this.duck3.pos[1] && this.gameStart === false) {
       // this.duck3.alive = true;
       this.gameStart = true;
+      this.shot = 0;
     }
 
   }

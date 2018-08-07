@@ -163,6 +163,7 @@ var Game = function () {
     this.duck3 = new Duck({ pos: [600, 100], vel: [0, 0], dir: "right" });
     this.stage = new Stage();
     this.gameStart = false;
+    this.shot = 0;
     this.points = 0;
 
     this.mainLoop = this.mainLoop.bind(this);
@@ -189,8 +190,7 @@ var Game = function () {
   }, {
     key: "draw",
     value: function draw() {
-      var SCREEN_WIDTH = window.innerWidth;
-      var SCREEN_HEIGHT = window.innerHeight;
+
       if (this.points === 300) {
         this.resetGame();
         // this.resetGame();
@@ -227,6 +227,7 @@ var Game = function () {
         // this.duck3 = new Duck({ pos: [600,100], vel: [0,0], dir: "right" });
         // this.stage = new Stage;
         _this2.gameStart = false;
+        _this2.shot = 0;
         _this2.points = 0;
       }, 2000);
     }
@@ -237,11 +238,14 @@ var Game = function () {
       var y = e.clientY;
       var imgHeight = 120;
       var imgWidth = 150;
-      var SCREEN_WIDTH = window.innerWidth;
-      var SCREEN_HEIGHT = window.innerHeight;
+      this.shot += 1;
+      console.log(this.shot);
+      if (this.shot === 3) {
+        this.resetGame();
+      }
 
-      this.ctx.fillStyle = "white";
-      this.ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+      // this.ctx.fillStyle = ("red");
+      // this.ctx.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
 
       if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight && x > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart) {
         this.duck.alive = false;
@@ -255,9 +259,10 @@ var Game = function () {
         this.duck2.alive = false;
         this.points += 100;
       }
-      if (x < this.duck3.pos[0] + 450 && y < this.duck3.pos[1] + 450 && x > this.duck3.pos[0] && y > this.duck3.pos[1]) {
+      if (x < this.duck3.pos[0] + 450 && y < this.duck3.pos[1] + 450 && x > this.duck3.pos[0] && y > this.duck3.pos[1] && this.gameStart === false) {
         // this.duck3.alive = true;
         this.gameStart = true;
+        this.shot = 0;
       }
     }
   }]);
