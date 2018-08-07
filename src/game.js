@@ -1,8 +1,14 @@
 const Stage = require("./stage");
 const Duck = require("./duck");
 
+var SCREEN_WIDTH = window.innerWidth;
+var SCREEN_HEIGHT = document.documentElement.scrollHeight;;
 
+window.onresize = function() {
+    SCREEN_HEIGHT = canvas.height = document.documentElement.scrollHeight;
+    SCREEN_WIDTH = canvas.width = document.body.offsetWidth;
 
+};
 
 
 class Game {
@@ -40,30 +46,30 @@ class Game {
   }
 
   draw() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const SCREEN_WIDTH = window.innerWidth;
+    const SCREEN_HEIGHT = window.innerHeight;
     if(this.points === 300) {
       this.resetGame();
       // this.resetGame();
     }
 
     if (this.gameStart) {
-      this.ctx.clearRect(0, 0, width, height);
+      this.ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       this.duck.draw(this.ctx);
       this.duck1.draw(this.ctx);
       this.duck2.draw(this.ctx);
       this.stage.draw(this.ctx);
       this.ctx.font = "40pt Calibri";
       this.ctx.fillStyle = 'white';
-      this.ctx.fillText(this.points, width - 200 , height - 50);
+      this.ctx.fillText(this.points, SCREEN_WIDTH - 200 , SCREEN_HEIGHT - 50);
       // setTimeout(this.resetGame(), 30000);
     } else {
-        this.ctx.clearRect(0, 0, width, height);
+        this.ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         this.stage.draw(this.ctx);
         this.duck3.draw(this.ctx, 300, 300);
         this.ctx.font = "50pt Calibri";
         this.ctx.fillStyle = 'white';
-        this.ctx.fillText("Click the Duck to Start", width - 1050 , height - 50);
+        this.ctx.fillText("Click the Duck to Start", SCREEN_WIDTH - 1050 , SCREEN_HEIGHT - 50);
     }
   }
 
@@ -83,12 +89,12 @@ class Game {
     let y = e.clientY;
     const imgHeight = 120;
     const imgWidth = 150;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const SCREEN_WIDTH = window.innerWidth;
+    const SCREEN_HEIGHT = window.innerHeight;
 
 
 		this.ctx.fillStyle = ("white");
-    this.ctx.fillRect(0,0,width, height);
+    this.ctx.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if ( x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight
          && x  > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart) {
@@ -111,11 +117,7 @@ class Game {
       this.gameStart = true;
     }
 
-
-
   }
-
-
 
 }
 
