@@ -239,7 +239,7 @@ var Game = function () {
       var imgHeight = 120;
       var imgWidth = 150;
       this.shot += 1;
-      console.log(this.shot);
+
       if (this.shot === 3) {
         this.resetGame();
       }
@@ -247,15 +247,15 @@ var Game = function () {
       // this.ctx.fillStyle = ("red");
       // this.ctx.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
 
-      if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight && x > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart) {
+      if (x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight && x > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart && this.duck.alive === true) {
         this.duck.alive = false;
         this.points += 100;
       }
-      if (x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight && x > this.duck1.pos[0] && y > this.duck1.pos[1] && this.gameStart) {
+      if (x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight && x > this.duck1.pos[0] && y > this.duck1.pos[1] && this.gameStart && this.duck1.alive === true) {
         this.duck1.alive = false;
         this.points += 100;
       }
-      if (x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight && x > this.duck2.pos[0] && y > this.duck2.pos[1] && this.gameStart) {
+      if (x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight && x > this.duck2.pos[0] && y > this.duck2.pos[1] && this.gameStart && this.duck2.alive === true) {
         this.duck2.alive = false;
         this.points += 100;
       }
@@ -316,6 +316,19 @@ var Duck = function () {
   }
 
   _createClass(Duck, [{
+    key: 'sprite',
+    value: function sprite(options) {
+
+      var that = {};
+
+      that.context = options.context;
+      that.width = options.width;
+      that.height = options.height;
+      that.image = options.image;
+
+      return that;
+    }
+  }, {
     key: 'draw',
     value: function draw(ctx) {
       var sizeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 90;

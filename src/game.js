@@ -91,7 +91,7 @@ class Game {
     const imgHeight = 120;
     const imgWidth = 150;
     this.shot += 1;
-    console.log(this.shot);
+
     if(this.shot === 3) {
       this.resetGame();
     }
@@ -100,17 +100,17 @@ class Game {
     // this.ctx.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if ( x < this.duck.pos[0] + imgWidth && y < this.duck.pos[1] + imgHeight
-         && x  > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart) {
+         && x  > this.duck.pos[0] && y > this.duck.pos[1] && this.gameStart && this.duck.alive === true) {
       this.duck.alive = false;
       this.points += 100;
     }
     if ( x < this.duck1.pos[0] + imgWidth && y < this.duck1.pos[1] + imgHeight
-         && x  > this.duck1.pos[0] && y > this.duck1.pos[1] && this.gameStart) {
+         && x  > this.duck1.pos[0] && y > this.duck1.pos[1] && this.gameStart && this.duck1.alive === true) {
       this.duck1.alive = false;
       this.points += 100;
     }
     if ( x < this.duck2.pos[0] + imgWidth && y < this.duck2.pos[1] + imgHeight
-         && x  > this.duck2.pos[0] && y > this.duck2.pos[1] && this.gameStart) {
+         && x  > this.duck2.pos[0] && y > this.duck2.pos[1] && this.gameStart && this.duck2.alive === true) {
       this.duck2.alive = false;
       this.points += 100;
     }
