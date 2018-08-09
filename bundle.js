@@ -241,7 +241,7 @@ var Game = function () {
       this.shot += 1;
 
       if (this.shot === 3) {
-        this.resetGame();
+        this.gameStart = false;
       }
 
       // this.ctx.fillStyle = ("red");

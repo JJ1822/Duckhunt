@@ -75,14 +75,15 @@ class Game {
 
 
   resetGame() {
-    setTimeout(() => {this.duck = new Duck({ pos: [600,200], vel: [9,5], dir: "right" });
-    this.duck1 = new Duck({ pos: [1,200], vel: [12,7], dir: "right" });
-    this.duck2 = new Duck({ pos: [600,1], vel: [-12,3], dir: "right" });
-    // this.duck3 = new Duck({ pos: [600,100], vel: [0,0], dir: "right" });
-    // this.stage = new Stage;
-    this.gameStart = false;
-    this.shot = 0;
-    this.points = 0;}, 2000);
+    setTimeout(() => {
+      this.duck = new Duck({ pos: [600,200], vel: [9,5], dir: "right" });
+      this.duck1 = new Duck({ pos: [1,200], vel: [12,7], dir: "right" });
+      this.duck2 = new Duck({ pos: [600,1], vel: [-12,3], dir: "right" });
+      // this.duck3 = new Duck({ pos: [600,100], vel: [0,0], dir: "right" });
+      // this.stage = new Stage;
+      this.gameStart = false;
+      this.shot = 0;
+      this.points = 0;}, 2000);
   }
 
   handleClick(e) {
@@ -93,7 +94,7 @@ class Game {
     this.shot += 1;
 
     if(this.shot === 3) {
-      this.resetGame();
+      this.gameStart = false;
     }
 
 		// this.ctx.fillStyle = ("red");
