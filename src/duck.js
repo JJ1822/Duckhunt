@@ -5,6 +5,7 @@ class Duck {
     this.vel = options.vel;
     this.dir = options.dir;
     this.alive = true;
+    this.flyAway = false;
     this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
