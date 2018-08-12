@@ -94,7 +94,9 @@ class Game {
     this.shot += 1;
 
     if(this.shot === 3) {
-      this.gameStart = false;
+      this.duck.flyAway = true;
+      this.duck1.flyAway = true;
+      this.duck2.flyAway = true;
     }
 
 		// this.ctx.fillStyle = ("red");

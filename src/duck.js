@@ -154,14 +154,17 @@ class Duck {
       this.vel = [0,0];
     } else if (!this.alive && this.deathCounter > 10) {
       this.vel = [0,5];
-    } else if ( dx > window.innerWidth - 100 || dx < 0 ) {
+    } else if (!this.flyAway && (dx > window.innerWidth - 100 || dx < 0 )) {
       this.vel[0] = -this.vel[0];
-    } else if ( dy > (window.innerHeight - 150) || dy < 0 ) {
+    } else if (!this.flyAway && (dy > (window.innerHeight - 150) || dy < 0)) {
       this.vel[1] = -this.vel[1];
+    } else if (this.flyAway) {
+      this.vel = [0,-5];
     }
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
   }
+
 }
 
 module.exports = Duck;

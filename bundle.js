@@ -241,7 +241,9 @@ var Game = function () {
       this.shot += 1;
 
       if (this.shot === 3) {
-        this.gameStart = false;
+        this.duck.flyAway = true;
+        this.duck1.flyAway = true;
+        this.duck2.flyAway = true;
       }
 
       // this.ctx.fillStyle = ("red");
@@ -441,10 +443,12 @@ var Duck = function () {
         this.vel = [0, 0];
       } else if (!this.alive && this.deathCounter > 10) {
         this.vel = [0, 5];
-      } else if (dx > window.innerWidth - 100 || dx < 0) {
+      } else if (!this.flyAway && (dx > window.innerWidth - 100 || dx < 0)) {
         this.vel[0] = -this.vel[0];
-      } else if (dy > window.innerHeight - 150 || dy < 0) {
+      } else if (!this.flyAway && (dy > window.innerHeight - 150 || dy < 0)) {
         this.vel[1] = -this.vel[1];
+      } else if (this.flyAway) {
+        this.vel = [0, -5];
       }
       this.pos[0] += this.vel[0];
       this.pos[1] += this.vel[1];
