@@ -297,7 +297,7 @@ var Duck = function () {
     this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
-    this.img1.src = './app/assets/images/ducks/right0.png';
+    this.img1.src = './app/assets/images/sprite.png';
     this.img2 = new Image();
     this.img2.src = './app/assets/images/ducks/right1.png';
     this.img3 = new Image();
@@ -318,25 +318,31 @@ var Duck = function () {
     this.deadImg3.src = './app/assets/images/ducks/dead2.png';
   }
 
+  // sprite(options) {
+  //
+  //   var that = {};
+  //
+  //   that.context = options.context;
+  //   that.width = options.width;
+  //   that.height = options.height;
+  //   that.image = options.image;
+  //
+  //   return that;
+  // }
+
+
   _createClass(Duck, [{
-    key: 'sprite',
-    value: function sprite(options) {
-
-      var that = {};
-
-      that.context = options.context;
-      that.width = options.width;
-      that.height = options.height;
-      that.image = options.image;
-
-      return that;
-    }
-  }, {
     key: 'draw',
     value: function draw(ctx) {
       var sizeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 90;
       var sizeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 90;
 
+      var coin = this.sprite({
+        context: ctx,
+        width: 100,
+        height: 100,
+        image: this.img1
+      });
 
       this.counter = (this.counter + 1) % 24;
       var rightimg = {

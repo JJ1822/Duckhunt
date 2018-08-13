@@ -9,7 +9,7 @@ class Duck {
     this.deathCounter = 0;
     this.counter = 0;
     this.img1 = new Image();
-    this.img1.src = './app/assets/images/ducks/right0.png';
+    this.img1.src = './app/assets/images/sprite.png';
     this.img2 = new Image();
     this.img2.src = './app/assets/images/ducks/right1.png';
     this.img3 = new Image();
@@ -32,21 +32,27 @@ class Duck {
 
   }
 
-  sprite(options) {
-
-    var that = {};
-
-    that.context = options.context;
-    that.width = options.width;
-    that.height = options.height;
-    that.image = options.image;
-
-    return that;
-  }
+  // sprite(options) {
+  //
+  //   var that = {};
+  //
+  //   that.context = options.context;
+  //   that.width = options.width;
+  //   that.height = options.height;
+  //   that.image = options.image;
+  //
+  //   return that;
+  // }
 
 
 
   draw(ctx, sizeX = 90, sizeY = 90) {
+    var coin = this.sprite({
+    context: ctx,
+    width: 100,
+    height: 100,
+    image: this.img1
+    });
 
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
