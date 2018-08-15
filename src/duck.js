@@ -36,10 +36,11 @@ class Duck {
 
     var that = {};
 
-    that.context = options.context;
-    that.width = options.width;
+    that.x = options.x;
+    that.y = options.y;
     that.height = options.height;
-    that.image = options.image;
+    that.width = options.width;
+    that.image = options.image
 
     return that;
   }
@@ -47,34 +48,56 @@ class Duck {
 
 
   draw(ctx, sizeX = 90, sizeY = 90) {
+    var test = this.sprite({
+      x: 0,
+      y: 110,
+      width: 38,
+      height: 45,
+      image: this.img1
+    })
 
+    var test1 = this.sprite({
+      x: 38,
+      y: 110,
+      width: 38,
+      height: 45,
+      image: this.img1
+    })
+
+    var test2 = this.sprite({
+      x: 76,
+      y: 110,
+      width: 38,
+      height: 45,
+      image: this.img1
+    })
 
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
-      0: this.img1,
-      1: this.img1,
-      2: this.img1,
-      3: this.img1,
-      4: this.img1,
-      5: this.img1,
-      6: this.img1,
-      7: this.img1,
-      8: this.img2,
-      9: this.img2,
-      10: this.img2,
-      11: this.img2,
-      12: this.img2,
-      13: this.img2,
-      14: this.img2,
-      15: this.img2,
-      16: this.img3,
-      17: this.img3,
-      18: this.img3,
-      19: this.img3,
-      20: this.img3,
-      21: this.img3,
-      22: this.img3,
-      23: this.img3
+      0: test,
+      1: test,
+      2: test,
+      3: test,
+      4: test,
+      5: test,
+      6: test,
+      7: test,
+      8: test1,
+      9: test1,
+      10: test1,
+      11: test1,
+      12: test1,
+      13: test1,
+      14: test1,
+      15: test1,
+      16: test2,
+      17: test2,
+      18: test2,
+      19: test2,
+      20: test2,
+      21: test2,
+      22: test2,
+      23: test2
     };
 
     const leftimg = {
@@ -118,7 +141,7 @@ class Duck {
       10: this.deadImg3,
       11: this.deadImg3
     };
-
+    var testDuck;
     let posx = this.pos[0];
     let posy = this.pos[1];
     // this.img.src = rightimg[this.counter];
@@ -132,7 +155,16 @@ class Duck {
      if (this.alive && this.vel[0] < 0) {
       ctx.drawImage(leftimg[this.counter], posx, posy, sizeX, sizeY);
     } else if (this.alive) (
-      ctx.drawImage(rightimg[this.counter],0,0,90,90, posx, posy, sizeX, sizeY)
+      testDuck = rightimg[this.counter],
+      // console.log(rightimg[this.counter])
+      ctx.drawImage(
+        testDuck.image,
+        testDuck.x,
+        testDuck.y,
+        testDuck.width,
+        testDuck.height,
+        posx, posy, sizeX, sizeY
+      )
     );
     // let img = new Image();
     // if( this.dir === 'right' ) {
