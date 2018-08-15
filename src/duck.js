@@ -47,23 +47,18 @@ class Duck {
 
 
   draw(ctx, sizeX = 90, sizeY = 90) {
-    var coin = this.sprite({
-    context: ctx,
-    width: 100,
-    height: 100,
-    image: this.img1
-    });
+
 
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
-      0: coin,
-      1: coin,
-      2: coin,
-      3: coin,
-      4: coin,
-      5: coin,
-      6: coin,
-      7: coin,
+      0: this.img1,
+      1: this.img1,
+      2: this.img1,
+      3: this.img1,
+      4: this.img1,
+      5: this.img1,
+      6: this.img1,
+      7: this.img1,
       8: this.img2,
       9: this.img2,
       10: this.img2,
@@ -137,7 +132,7 @@ class Duck {
      if (this.alive && this.vel[0] < 0) {
       ctx.drawImage(leftimg[this.counter], posx, posy, sizeX, sizeY);
     } else if (this.alive) (
-      ctx.drawImage(rightimg[this.counter], posx, posy, sizeX, sizeY)
+      ctx.drawImage(rightimg[this.counter],0,0,90,90, posx, posy, sizeX, sizeY)
     );
     // let img = new Image();
     // if( this.dir === 'right' ) {
