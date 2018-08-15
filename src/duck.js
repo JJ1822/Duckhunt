@@ -32,17 +32,17 @@ class Duck {
 
   }
 
-  // sprite(options) {
-  //
-  //   var that = {};
-  //
-  //   that.context = options.context;
-  //   that.width = options.width;
-  //   that.height = options.height;
-  //   that.image = options.image;
-  //
-  //   return that;
-  // }
+  sprite(options) {
+
+    var that = {};
+
+    that.context = options.context;
+    that.width = options.width;
+    that.height = options.height;
+    that.image = options.image;
+
+    return that;
+  }
 
 
 
@@ -56,14 +56,14 @@ class Duck {
 
     this.counter = (this.counter + 1) % 24;
     const rightimg = {
-      0: this.img1,
-      1: this.img1,
-      2: this.img1,
-      3: this.img1,
-      4: this.img1,
-      5: this.img1,
-      6: this.img1,
-      7: this.img1,
+      0: coin,
+      1: coin,
+      2: coin,
+      3: coin,
+      4: coin,
+      5: coin,
+      6: coin,
+      7: coin,
       8: this.img2,
       9: this.img2,
       10: this.img2,
