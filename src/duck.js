@@ -141,7 +141,7 @@ class Duck {
       10: this.deadImg3,
       11: this.deadImg3
     };
-    var testDuck;
+  
     let posx = this.pos[0];
     let posy = this.pos[1];
     // this.img.src = rightimg[this.counter];

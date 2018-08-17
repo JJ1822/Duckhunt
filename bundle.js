@@ -431,7 +431,7 @@ var Duck = function () {
         10: this.deadImg3,
         11: this.deadImg3
       };
-      var testDuck;
+
       var posx = this.pos[0];
       var posy = this.pos[1];
       // this.img.src = rightimg[this.counter];
